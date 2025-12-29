@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npx babel . -d dist",
     "main-start": "npm install express mongoose jsonwebtoken bcrypt cors multer nodemailer winston uid crypto crypto-js dotenv @babel/cli @babel/core @babel/preset-env nodemon express-validator nodemon winston",
-    "start:dev": "nodemon server.js",
+    "dev": "nodemon server.js",
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

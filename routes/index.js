@@ -8,6 +8,16 @@ import sectionsRoutes from "../main-routes/sections.js";
 indexRoute.use("/sections", sectionsRoutes);
 /*======================= Users Routes =================================== */
 
+/*======================= Users Routes =================================== */
+import GlobalRoutes from "../main-routes/globalSettingRoutes.js";
+indexRoute.use("/global", GlobalRoutes);
+/*======================= Users Routes =================================== */
+
+/*======================= Users Routes =================================== */
+import SocialMediaRoutes from "../main-routes/socialMedaiRoutes.js";
+indexRoute.use("/social", SocialMediaRoutes);
+/*======================= Users Routes =================================== */
+
 
 
 
