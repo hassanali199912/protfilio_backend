@@ -1,9 +1,9 @@
-import HeroSectionModel from "../models/herosection.js"
+import ProfileContent from "../models/ProfileContent.js"
 import BaseCRUD from "../generics/Base-crud.js"
 import BaseController from "../generics/Base-Controller.js"
 import BaseRouters from "../generics/Base-Routes.js"
 
-const objectCrud = new BaseCRUD(HeroSectionModel);
+const objectCrud = new BaseCRUD(ProfileContent);
 const objectController = new BaseController(objectCrud);
 const objectRoutes = new BaseRouters(objectController);
 

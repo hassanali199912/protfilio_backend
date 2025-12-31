@@ -19,6 +19,14 @@ indexRoute.use("/social", SocialMediaRoutes);
 /*======================= Users Routes =================================== */
 
 
+/*======================= Hero Section Routes =================================== */
+import profileContent from "../main-routes/profileContentRoutes.js";
+import statesRoutes from "../main-routes/statesRoutes.js";
+indexRoute.use("/profile-content", profileContent);
+indexRoute.use("/hero-state", statesRoutes);
+/*=======================  Hero Section Routes =================================== */
+
+
 
 
 
@@ -28,19 +36,6 @@ import userRoutes from "../main-routes/userBasicRoutes.js";
 indexRoute.use("/users", userRoutes);
 /*======================= Users Routes =================================== */
 
-/*======================= Hero Section Routes =================================== */
-import heroSection from "../main-routes/heroSectionRoutes.js";
-import statesRoutes from "../main-routes/statesRoutes.js";
-indexRoute.use("/hero", heroSection);
-indexRoute.use("/hero-state", statesRoutes);
-/*=======================  Hero Section Routes =================================== */
-
-/*======================= About Section Routes =================================== */
-import aboutSection from "../main-routes/aboutSectionRoutes.js"
-import socialMedia from "../main-routes/socialMedaiRoutes.js"
-indexRoute.use("/about", aboutSection);
-indexRoute.use("/about-social", socialMedia);
-/*=======================  About Section Routes =================================== */
 
 /*======================= Work Process Section Routes =================================== */
 import workProcessSection from "../main-routes/workProcess.Section.js"
