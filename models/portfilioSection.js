@@ -2,50 +2,57 @@ import mongoose from "mongoose";
 
 
 const portfolioSchema = new mongoose.Schema({
-    images: [{
-        type: String
-    }],
-    videos: [{
-        type: String
-    }],
-    tags: [{
-        type: String
-    }],
-    main_image: {
-        type: String
+
+    title: {
+        ar: { type: String, required: true },
+        en: { type: String, required: true }
     },
-    ar_name: {
+
+    shortDescription: {
+        ar: { type: String, required: true },
+        en: { type: String, required: true }
+    },
+
+    image: {
         type: String,
         required: true
     },
-    en_name: {
+
+    role: {
+        ar: String,
+        en: String
+    },
+
+    techStack: [
+        {
+            type: String
+        }
+    ],
+
+    projectType: {
         type: String,
+        enum: ["personal", "freelance", "government", "company"],
         required: true
     },
-    ar_description: {
-        type: String,
-        required: true
+
+    liveUrl: String,
+    githubUrl: String,
+
+    isFeatured: {
+        type: Boolean,
+        default: false
     },
-    en_description: {
-        type: String,
-        required: true
-    },
-    ar_cat_name: {
-        type: String,
-        required: true
-    },
-    en_cat_name: {
-        type: String,
-        required: true
-    },
+
     order: {
         type: Number,
-        default: 0,
+        default: 0
     },
+
     isVisible: {
         type: Boolean,
-        default: true,
-    },
+        default: true
+    }
+
 
 
 }, { timestamps: true })

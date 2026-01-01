@@ -18,13 +18,19 @@ import SocialMediaRoutes from "../main-routes/socialMedaiRoutes.js";
 indexRoute.use("/social", SocialMediaRoutes);
 /*======================= Users Routes =================================== */
 
-
 /*======================= Hero Section Routes =================================== */
 import profileContent from "../main-routes/profileContentRoutes.js";
 import statesRoutes from "../main-routes/statesRoutes.js";
 indexRoute.use("/profile-content", profileContent);
 indexRoute.use("/hero-state", statesRoutes);
 /*=======================  Hero Section Routes =================================== */
+
+/*======================= Portfolio Section Routes =================================== */
+import portfolioSection from "../main-routes/portfolioSectionRoutes.js"
+indexRoute.use("/portfolio", portfolioSection);
+/*=======================  Portfolio Section Routes =================================== */
+
+
 
 
 
@@ -42,10 +48,6 @@ import workProcessSection from "../main-routes/workProcess.Section.js"
 indexRoute.use("/work-process", workProcessSection);
 /*=======================  Work Process Section Routes =================================== */
 
-/*======================= Portfolio Section Routes =================================== */
-import portfolioSection from "../main-routes/portfolioSectionRoutes.js"
-indexRoute.use("/portfolio", portfolioSection);
-/*=======================  Portfolio Section Routes =================================== */
 
 /*======================= Contact Us Section Routes =================================== */
 import messageRoutes from "../main-routes/messageRoutes.js"
