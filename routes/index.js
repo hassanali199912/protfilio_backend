@@ -34,6 +34,11 @@ import skillSection from "../main-routes/skills.js";
 indexRoute.use("/skills", skillSection);
 /*=======================  Skills Section Routes =================================== */
 
+/*======================= Skills Section Routes =================================== */
+import ExperienceSection from "../main-routes/experienceSectionRoutes.js";
+indexRoute.use("/experience", ExperienceSection);
+/*=======================  Skills Section Routes =================================== */
+
 /*======================= Users Routes =================================== */
 import userRoutes from "../main-routes/userBasicRoutes.js";
 indexRoute.use("/users", userRoutes);
