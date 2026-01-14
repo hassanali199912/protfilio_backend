@@ -1,6 +1,5 @@
 import express from "express";
 
-
 const indexRoute = express.Router();
 
 /*======================= Users Routes =================================== */
@@ -26,33 +25,28 @@ indexRoute.use("/hero-state", statesRoutes);
 /*=======================  Hero Section Routes =================================== */
 
 /*======================= Portfolio Section Routes =================================== */
-import portfolioSection from "../main-routes/portfolioSectionRoutes.js"
+import portfolioSection from "../main-routes/portfolioSectionRoutes.js";
 indexRoute.use("/portfolio", portfolioSection);
 /*=======================  Portfolio Section Routes =================================== */
 
-
-
-
-
-
-
+/*======================= Skills Section Routes =================================== */
+import skillSection from "../main-routes/skills.js";
+indexRoute.use("/skills", skillSection);
+/*=======================  Skills Section Routes =================================== */
 
 /*======================= Users Routes =================================== */
 import userRoutes from "../main-routes/userBasicRoutes.js";
 indexRoute.use("/users", userRoutes);
 /*======================= Users Routes =================================== */
 
-
 /*======================= Work Process Section Routes =================================== */
-import workProcessSection from "../main-routes/workProcess.Section.js"
+import workProcessSection from "../main-routes/workProcess.Section.js";
 indexRoute.use("/work-process", workProcessSection);
 /*=======================  Work Process Section Routes =================================== */
 
-
 /*======================= Contact Us Section Routes =================================== */
-import messageRoutes from "../main-routes/messageRoutes.js"
+import messageRoutes from "../main-routes/messageRoutes.js";
 indexRoute.use("/message", messageRoutes);
 /*=======================  Contact Us Section Routes =================================== */
-
 
 export default indexRoute;
