@@ -54,4 +54,8 @@ import messageRoutes from "../main-routes/messageRoutes.js";
 indexRoute.use("/message", messageRoutes);
 /*=======================  Contact Us Section Routes =================================== */
 
+import frontRoutes from "../main-routes/frontRoutes.js";
+indexRoute.use("/front", frontRoutes);
+/*=======================  Contact Us Section Routes =================================== */
+
 export default indexRoute;
