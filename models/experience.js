@@ -4,7 +4,7 @@ const experienceSchema = new mongoose.Schema(
   {
     type: {
       type: String,
-      enum: ["education", "work"],
+      enum: ["education", "work", "training"],
       required: true,
     },
 
@@ -33,7 +33,7 @@ const experienceSchema = new mongoose.Schema(
       default: true,
     },
   },
-  { timeseries: true }
+  { timeseries: true },
 );
 
 experienceSchema.index({ order: 1 });
