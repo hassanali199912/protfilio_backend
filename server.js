@@ -4,8 +4,16 @@ dotenv.config();
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import { swaggerUi, swaggerSpec } from "./config/swagger.js"; 
-import indexRoutes from "./routes/index.js"
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+import { swaggerUi, swaggerSpec } from "./config/swagger.js";
+import indexRoutes from "./routes/index.js";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const uploadsDir = path.join(__dirname, "uploads");
+fs.mkdirSync(uploadsDir, { recursive: true });
+
 const app = express();
 const PORT = process.env.PORT || 8080;
 // Middleware
@@ -21,6 +29,10 @@ app.use((req, res, next) => {
 });
 
 app.use(cors());
+
+// Public files saved under /uploads → GET /api/uploads/<filename>
+app.use("/api/uploads", express.static(uploadsDir));
+
 // Main Router
 app.use("/api", indexRoutes);
 app.use("/test", (req, res) => {
