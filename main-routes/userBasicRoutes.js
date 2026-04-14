@@ -74,7 +74,7 @@ class UserRoutesCustom extends BaseRouters {
   protectedRoutes() {
     this.router.post(
       "/",
-      checkToken,
+       checkToken,
       isAdmin,
       userCreateValidation,
       validationHandlerMiddleware,
