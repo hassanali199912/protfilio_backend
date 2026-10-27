@@ -17,6 +17,8 @@ fs.mkdirSync(uploadsDir, { recursive: true });
 const app = express();
 const PORT = process.env.PORT || 8080;
 // Middleware
+// Compile accepts a full .tex document. Other routes stay on the default limit.
+app.use("/api/cv/compile", express.json({ limit: "600kb" }));
 app.use(express.json());
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");

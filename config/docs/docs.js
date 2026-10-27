@@ -131,3 +131,78 @@
  *       401:
  *         description: Unauthorized
  */
+
+/**
+ * @swagger
+ * tags:
+ *   name: CV
+ *   description: Job analysis and local PDF compile. Does not write portfolio data.
+ */
+
+/**
+ * @swagger
+ * /api/cv/analyze:
+ *   post:
+ *     tags: [CV]
+ *     summary: Analyze a job description
+ *     description: Reads the saved profile and returns a summary, matching skills, and a cover letter. Does not update the database.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [jobTitle, companyName, jobDescription]
+ *             properties:
+ *               jobTitle:
+ *                 type: string
+ *               companyName:
+ *                 type: string
+ *               jobDescription:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Analysis result
+ *       400:
+ *         description: Validation error or missing profile data
+ *       500:
+ *         description: OPENROUTER_API_KEY is not configured
+ *       502:
+ *         description: The model request failed
+ */
+
+/**
+ * @swagger
+ * /api/cv/compile:
+ *   post:
+ *     tags: [CV]
+ *     summary: Compile a filled TeX document to PDF
+ *     description: Runs a local LaTeX engine in a temporary folder and returns the PDF. The file is not stored.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [tex, filename]
+ *             properties:
+ *               tex:
+ *                 type: string
+ *               filename:
+ *                 type: string
+ *                 enum: [cv, cover-letter]
+ *     responses:
+ *       200:
+ *         description: PDF file
+ *         content:
+ *           application/pdf:
+ *             schema:
+ *               type: string
+ *               format: binary
+ *       400:
+ *         description: Validation error
+ *       422:
+ *         description: LaTeX compilation failed
+ *       500:
+ *         description: LaTeX engine is missing or not allowed
+ */
