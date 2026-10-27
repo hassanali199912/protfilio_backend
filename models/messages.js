@@ -1,33 +1,27 @@
 import mongoose from "mongoose";
 
-
 const messagesSchema = new mongoose.Schema({
-
     name: {
         type: String,
-        required: true
+        required: true,
+        trim: true,
     },
-    email: {
+    whatsapp: {
         type: String,
-        required: true
-    },
-    location: {
-        type: String,
-        required: true
+        required: true,
+        trim: true,
     },
     budget: {
         type: String,
-        required: true
-    },
-    subject: {
-        type: String
+        required: true,
+        trim: true,
     },
     message: {
-        type: String
+        type: String,
+        required: true,
+        trim: true,
     },
-    isRead: { type: Boolean, default: true }
-
-
+    isRead: { type: Boolean, default: false },
 }, { timestamps: true });
 
 export default mongoose.model("Message", messagesSchema);
