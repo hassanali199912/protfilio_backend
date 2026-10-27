@@ -1,0 +1,100 @@
+---
+description: Portfolio API project role, architecture, and conventions
+alwaysApply: true
+---
+
+# Portfolio API — Project Role
+
+Express + MongoDB API that stores Hassan Ali's portfolio content and serves one public aggregate for the site. ESM JavaScript (`"type": "module"`). Relative imports include the `.js` extension.
+
+## Tech Stack
+
+- **HTTP**: Express 5 in `server.js`. Port `process.env.PORT` or `8080`.
+- **Data**: Mongoose. Connection string `process.env.MONGO_URI`.
+- **Auth**: JWT (`JWT_SECRET`). Admin role value is `CODEMODE`.
+- **Uploads**: files under `uploads/`, served at `GET /api/uploads/<filename>`.
+- **Docs**: Swagger UI at `/api-docs` (`config/swagger.js`, `config/docs/docs.js`).
+- **Deploy**: Vercel (`vercel.json` sends every path to `server.js`).
+
+## Folder Structure
+
+```
+server.js                 # App, CORS, static uploads, /api, /api-docs
+routes/index.js           # Mounts every resource under /api
+main-routes/              # One router file per resource
+models/                   # Mongoose schemas
+generics/
+  Base-crud.js            # Model-agnostic CRUD
+  Base-Controller.js      # HTTP handlers + ResponseHandler
+  Base-Routes.js          # Standard REST routes
+middlewares/              # JWT, admin, validators
+utils/ResponseHandler.js  # { success, status, message, data }
+```
+
+## Standard Resource
+
+New content types copy `main-routes/portfolioSectionRoutes.js`:
+
+```js
+const objectCrud = new BaseCRUD(Model);
+const objectController = new BaseController(objectCrud);
+const objectRoutes = new BaseRouters(objectController);
+export default objectRoutes.getRouter();
+```
+
+Then mount it in `routes/index.js`. `BaseRouters` exposes:
+
+| Method | Path | Action |
+|--------|------|--------|
+| GET | `/` | list |
+| GET | `/filter` | query filter |
+| GET | `/:id` | one |
+| GET | `/visible/:id` | toggle `isVisible` |
+| POST | `/` | create |
+| POST | `/many` | insertMany |
+| PUT | `/:id` | update |
+| DELETE | `/:id` | delete |
+
+## Mounted Routes (`/api`)
+
+| Path | Model |
+|------|--------|
+| `/sections` | section visibility (`key`, `title`, `isVisible`) |
+| `/global` | contact, CV, personal image |
+| `/social` | social links |
+| `/profile-content` | bilingual blocks (hero, about, work_process, portfolio, …) |
+| `/hero-state` | client / status logos |
+| `/portfolio` | projects (`projectType`: personal, freelance, government, company) |
+| `/skills` | skills |
+| `/experience` | work and education |
+| `/work-process` | process steps |
+| `/message` | contact messages |
+| `/users` | accounts. `POST /users/login` is public. Create, update, delete require `checkToken` + `isAdmin` |
+| `/front` | public aggregate for the site (`GET /api/front`) |
+
+`GET /api/front` returns visible records only for sections, experience, portfolio, skills, and social. It strips `_id`, `__v`, and timestamps from those lists. `status` and `work` are returned unfiltered.
+
+Bilingual fields are `{ ar, en }`. List items use `order` and `isVisible`.
+
+## Response Shape
+
+```js
+{ success: true, status, message, data }
+```
+
+Errors: `validationError` → 400, `authorizathionError` → 401, `notFound` → 404, `error` → 500. The public site reads `response.data.data`.
+
+## Conventions
+
+- Extend `BaseController` / `BaseRouters` when a resource needs extra actions (see `userBasicRoutes.js`). Do not copy CRUD by hand.
+- Register the route in `routes/index.js` and, when the public site should see it, add the query inside `FrontController.FrontData`.
+- Keep model filenames as they are, including `portfilioSection.js`.
+- Do not add a second framework or ORM.
+- `/blog` is not mounted. The dashboard already calls `/api/blog` with the standard CRUD shape; add it the same way as `/portfolio` before wiring it into `/front`.
+
+## Commands
+
+```bash
+npm run dev     # nodemon server.js
+npm start       # node server.js
+```
